@@ -8,7 +8,7 @@ import com.william.model.CategoryModel;
 public class CategoryDAO implements ICategoryDAO {
 
 	@Override
-	public List<CategoryModel> findAdll() {
+	public List<CategoryModel> findAll() {
 		
 		return null;
 	}
