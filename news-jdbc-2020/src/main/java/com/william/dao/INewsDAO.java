@@ -1,5 +1,7 @@
 package com.william.dao;
 
-public interface INewsDAO {
+import com.william.model.NewsModel;
 
+public interface INewsDAO extends GenericDAO<NewsModel> {
+	
 }
