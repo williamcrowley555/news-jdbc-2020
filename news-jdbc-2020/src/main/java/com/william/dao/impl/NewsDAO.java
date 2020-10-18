@@ -1,7 +1,17 @@
 package com.william.dao.impl;
 
-import com.william.dao.INewsDAO;
+import java.util.List;
 
-public class NewsDAO implements INewsDAO {
+import com.william.dao.INewsDAO;
+import com.william.mapper.NewsMapper;
+import com.william.model.NewsModel;
+
+public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
+
+	@Override
+	public List<NewsModel> findAll() {
+		String sql = "SELECT * FROM news";
+		return query(sql, new NewsMapper());
+	}
 
 }
