@@ -5,5 +5,5 @@ import java.util.List;
 import com.william.model.NewsModel;
 
 public interface INewsDAO extends GenericDAO<NewsModel> {
-	List<NewsModel> findAll();
+	List<NewsModel> findByCategoryId(Long categoryId);
 }

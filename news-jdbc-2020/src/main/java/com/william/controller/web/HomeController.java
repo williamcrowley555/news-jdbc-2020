@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.william.service.ICategoryService;
+import com.william.service.INewsService;
 
 @WebServlet(urlPatterns = {"/trang-chu"})
 public class HomeController extends HttpServlet {
@@ -18,9 +19,13 @@ public class HomeController extends HttpServlet {
 	
 	@Inject
 	private ICategoryService categoryService;
+	
+	@Inject
+	private INewsService newsService;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("categories", categoryService.findAll());
+		System.out.println(newsService.findByCategoryId(2L));
 		RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");
 		rd.forward(request, response);
 	}

@@ -12,3 +12,7 @@ insert into category(name, code) values('Thế giới','the-gioi');
 insert into category(name, code) values('Chính trị','chinh-tri');
 insert into category(name, code) values('Thời sự','thoi-su');
 insert into category(name, code) values('Góc nhìn','goc-nhin');
+
+insert into news(title, categoryid) values('Bài viết 1', 1);
+insert into news(title, categoryid) values('Bài viết 2', 2);
+insert into news(title, categoryid) values('Bài viết 3', 3);
