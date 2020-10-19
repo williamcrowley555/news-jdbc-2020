@@ -14,4 +14,10 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO {
 		return query(sql, new NewsMapper(), categoryId);
 	}
 
+	@Override
+	public Long save(NewsModel newsModel) {
+		String sql = "INSERT INTO news(title, content, categoryid) VALUES(?, ?, ?)";
+		return insert(sql, newsModel.getTitle(), newsModel.getContent(), newsModel.getCategoryId());
+	}
+
 }

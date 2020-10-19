@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.william.model.NewsModel;
 import com.william.service.ICategoryService;
 import com.william.service.INewsService;
 
@@ -24,8 +25,11 @@ public class HomeController extends HttpServlet {
 	private INewsService newsService;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("categories", categoryService.findAll());
-		System.out.println(newsService.findByCategoryId(2L).get(0).getTitle());
+		NewsModel newsModel = new NewsModel();
+		newsModel.setTitle("Bài viết 5");
+		newsModel.setContent("bai viet 5");
+		newsModel.setCategoryId(1L);
+		newsService.save(newsModel);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/web/home.jsp");
 		rd.forward(request, response);
 	}

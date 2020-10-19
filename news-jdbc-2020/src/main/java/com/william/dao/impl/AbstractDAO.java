@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping;
 import com.william.dao.GenericDAO;
 import com.william.mapper.RowMapper;
 
@@ -82,6 +84,81 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 				}
 			} catch (SQLException e) {
 				return null;
+			}
+		}
+	}
+
+	@Override
+	public Long insert(String sql, Object... parameters) {
+		Long id = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			resultSet = statement.getGeneratedKeys();
+			if(resultSet.next()) {
+				id = resultSet.getLong(1);
+			}
+			connection.commit();
+			return id;
+		} catch(SQLException e) {
+			try {
+				connection.rollback();
+			} catch(SQLException ex) {
+				ex.printStackTrace();
+			}
+			return null;
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				return null;
+			}
+		}
+	}
+
+	@Override
+	public void update(String sql, Object... parameters) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			connection.commit();
+		} catch(SQLException e) {
+			try {
+				connection.rollback();
+			} catch(SQLException ex) {
+				ex.printStackTrace();
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 	}

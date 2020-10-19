@@ -18,4 +18,10 @@ public class NewsService implements INewsService {
 		return newsDao.findByCategoryId(categoryId);
 	}
 
+	@Override
+	public NewsModel save(NewsModel newsModel) {
+		Long id = newsDao.save(newsModel);
+		System.out.println("Id News: " + id);
+		return null;
+	}
 }

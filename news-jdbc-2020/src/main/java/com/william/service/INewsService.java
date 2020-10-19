@@ -6,4 +6,5 @@ import com.william.model.NewsModel;
 
 public interface INewsService {
 	List<NewsModel> findByCategoryId(Long categoryId);
+	NewsModel save(NewsModel newsModel);
 }
