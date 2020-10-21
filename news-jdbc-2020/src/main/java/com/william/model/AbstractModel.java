@@ -4,10 +4,11 @@ import java.security.Timestamp;
 
 public class AbstractModel {
 	private Long id;
-	private Timestamp createDate;
-	private Timestamp modifieDate;
-	private String createBy;
-	private String modifieBy;
+	private Timestamp createdDate;
+	private Timestamp modifiedDate;
+	private String createdBy;
+	private String modifiedBy;
+	private Long[] ids;
 
 	public Long getId() {
 		return id;
@@ -17,36 +18,44 @@ public class AbstractModel {
 		this.id = id;
 	}
 
-	public Timestamp getCreateDate() {
-		return createDate;
+	public Timestamp getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
 	}
 
-	public Timestamp getModifieDate() {
-		return modifieDate;
+	public Timestamp getModifiedDate() {
+		return modifiedDate;
 	}
 
-	public void setModifieDate(Timestamp modifieDate) {
-		this.modifieDate = modifieDate;
+	public void setModifiedDate(Timestamp modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 
-	public String getCreateBy() {
-		return createBy;
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
-	public String getModifieBy() {
-		return modifieBy;
+	public String getModifiedBy() {
+		return modifiedBy;
 	}
 
-	public void setModifieBy(String modifieBy) {
-		this.modifieBy = modifieBy;
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public Long[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Long[] ids) {
+		this.ids = ids;
 	}
 	
 }
