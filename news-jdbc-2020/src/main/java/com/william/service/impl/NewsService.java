@@ -1,5 +1,6 @@
 package com.william.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,6 +21,8 @@ public class NewsService implements INewsService {
 
 	@Override
 	public NewsModel save(NewsModel newsModel) {
+		newsModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+		newsModel.setCreatedBy("");
 		Long id = newsDao.save(newsModel);
 		return newsDao.findOne(id);
 	}
@@ -29,6 +32,8 @@ public class NewsService implements INewsService {
 		NewsModel oldNews = newsDao.findOne(updateNews.getId());
 		updateNews.setCreatedDate(oldNews.getCreatedDate());
 		updateNews.setCreatedBy(oldNews.getCreatedBy());
+		updateNews.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+		updateNews.setModifiedBy("");
 		newsDao.update(updateNews);
 		return newsDao.findOne(updateNews.getId());
 	}
